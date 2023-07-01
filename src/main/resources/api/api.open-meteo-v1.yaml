@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: Open Meteo API
+  description: Open Meteo API for weather forecasts
+  version: 1.0.0
+servers:
+  - url: https://api.open-meteo.com/v1
+paths:
+  /forecast:
+    get:
+      summary: Get the weather forecast for a location
+      operationId: getForecast
+      parameters:
+        - in: query
+          name: latitude
+          required: true
+          schema:
+            type: number
+            format: float
+          description: The latitude of the location
+        - in: query
+          name: longitude
+          required: true
+          schema:
+            type: number
+            format: float
+          description: The longitude of the location
+        - in: query
+          name: daily
+          schema:
+            type: array
+            items:
+              type: string
+          description: Daily weather parameters
+        - in: query
+          name: timezone
+          schema:
+            type: string
+          description: The timezone of the location
+        - in: query
+          name: start_date
+          schema:
+            type: string
+            format: date
+            description: The start date of the forecast
+        - in: query
+          name: end_date
+          schema:
+            type: string
+            format: date
+            description: The end date of the forecast
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    description: Always set true for errors
+                  reason:
+                    type: string
+                    description: Description of the error
+                    example: "Latitude must be in range of -90 to 90°. Given: 300"
+components:
+  schemas:
+    Forecast:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        generationtime_ms:
+          type: number
+        utc_offset_seconds:
+          type: integer
+        timezone:
+          type: string
+        timezone_abbreviation:
+          type: string
+        elevation:
+          type: number
+        daily_units:
+          type: object
+          properties:
+            time:
+              type: string
+            sunrise:
+              type: string
+            sunset:
+              type: string
+        daily:
+          type: object
+          properties:
+            time:
+              type: array
+              items:
+                type: string
+            sunrise:
+              type: array
+              items:
+                type: string
+                format: date-time
+            sunset:
+              type: array
+              items:
+                type: string
+                format: date-time
+            precipitation_sum:
+              type: array
+              items:
+                type: number
+                format: double

@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /weather:
+    get:
+      tags:
+      - weather-controller
+      summary: Get weather data
+      operationId: getWeather
+      parameters:
+      - name: latitude
+        in: query
+        description: latitude
+        required: true
+        schema:
+          type: number
+          format: float
+        example: 52.52
+      - name: longitude
+        in: query
+        description: longitude
+        required: true
+        schema:
+          type: number
+          format: float
+        example: 13.41
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WeatherDto'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WeatherExceptionDto'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WeatherExceptionDto'
+components:
+  schemas:
+    WeatherDto:
+      type: object
+      properties:
+        sunrise:
+          type: string
+          format: date-time
+        sunset:
+          type: string
+          format: date-time
+        precipitation:
+          type: number
+    WeatherExceptionDto:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        date:
+          type: string
