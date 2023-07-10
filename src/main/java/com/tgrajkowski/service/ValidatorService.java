@@ -36,17 +36,9 @@ public class ValidatorService {
             throw new WeatherException(ExceptionEnum.FORECAST_COUNT_MISMATCH);
         }
 
-        // TODO - add more validation for precipitationSum
+        if (forecast.getDaily().getSunrise().size() != forecast.getDaily().getPrecipitationSum().size()) {
+            log.error("Forecast daily sunrise and precipitationSum count mismatch");
+            throw new WeatherException(ExceptionEnum.FORECAST_COUNT_MISMATCH);
+        }
     }
-
-//    public void validateDates(List<PrecipitationDate> precipitationDateList, List<LocalDateTime> sunriseList, List<LocalDateTime> sunsetList) {
-//        if (precipitationDateList.size() != sunriseList.size() || precipitationDateList.size() != sunsetList.size()) {
-//            throw new WeatherException(ExceptionEnum.FORECAST_COUNT_MISMATCH);
-//        }
-//        for (int i = 0; i <precipitationDateList.size(); i++) {
-//            if(!precipitationDateList.get(i).getDate().isEqual(sunriseList.get(i).toLocalDate()) || !precipitationDateList.get(i).getDate().isEqual(sunsetList.get(i).toLocalDate())) {
-//                throw new WeatherException(ExceptionEnum.FORECAST_DATE_SUNRISE_OR_SUNSET_NOT_EQUAL);
-//            }
-//        }
-//    }
 }

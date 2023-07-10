@@ -21,10 +21,7 @@ public enum ExceptionEnum {
     LATITUDE_NULL("LATITUDE_NULL","Latitude should be present" , HttpStatus.BAD_REQUEST),
     LONGITUDE_NULL("LONGITUDE_NULL","Longitude should be present" , HttpStatus.BAD_REQUEST),
     METHOD_ARGUMENT_TYPE_MISMATCH("METHOD_ARGUMENT_TYPE_MISMATCH", "Method argument type mismatch", HttpStatus.BAD_REQUEST),
-    MISSING_SERVLET_REQUEST_PARAMETER("MISSING_SERVLET_REQUEST_PARAMETER", "Missing servlet request parameter", HttpStatus.BAD_REQUEST),
-
-
-    FORECAST_DATE_SUNRISE_OR_SUNSET_NOT_EQUAL("FORECAST_DATE_SUNRISE_OR_SUNSET_NOT_EQUAL", "Date in PrecipitationDate object is not equal to Sunrise or Sunset date", HttpStatus.INTERNAL_SERVER_ERROR);
+    MISSING_SERVLET_REQUEST_PARAMETER("MISSING_SERVLET_REQUEST_PARAMETER", "Missing servlet request parameter", HttpStatus.BAD_REQUEST);
 
     private String code;
     private String message;

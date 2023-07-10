@@ -66,4 +66,16 @@ class ValidatorServiceTest {
 
         assertThrows(WeatherException.class, () -> validatorService.validateForecast(forecast), ExceptionEnum.FORECAST_COUNT_MISMATCH.getMessage());
     }
+
+    @Test
+    public void validateForecast_WhenSunriseAndPrecipitationSizeNotEqual_ShouldThrowException() {
+        Forecast forecast = new Forecast();
+        ForecastDaily daily = new ForecastDaily();
+        daily.setSunrise(List.of(LocalDateTime.now()));
+        daily.setSunset(List.of(LocalDateTime.now()));
+        daily.setPrecipitationSum(List.of(1.0, 2.0));
+        forecast.setDaily(daily);
+
+        assertThrows(WeatherException.class, () -> validatorService.validateForecast(forecast), ExceptionEnum.FORECAST_COUNT_MISMATCH.getMessage());
+    }
 }

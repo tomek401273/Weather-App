@@ -1,0 +1,15 @@
+Zbudowanie projektu
+mvn clean package
+
+Uruchomienie aplikacji
+mvn spring-boot:run
+
+Dokumentacja API Typu Swagger
+http://localhost:8080/swagger-ui/index.html
+
+Przykładowe wywołanie usługi
+http://localhost:8080/weather?latitude=52.52&longitude=13.41
+
+curl -X 'GET' \
+  'http://localhost:8080/weather?latitude=52.52&longitude=13.41' \
+  -H 'accept: */*'
