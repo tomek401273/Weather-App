@@ -2,28 +2,18 @@ package com.tgrajkowski.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @ControllerAdvice
-public class WeatherAppGlobalExceptionHandler  {
+public class WeatherAppGlobalExceptionHandler {
     private final Clock clock;
 
     @Autowired
@@ -40,7 +30,7 @@ public class WeatherAppGlobalExceptionHandler  {
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<WeatherExceptionDto> handleMissingRequestParam (MissingServletRequestParameterException ex) {
+    public ResponseEntity<WeatherExceptionDto> handleMissingRequestParam(MissingServletRequestParameterException ex) {
         log.error("MissingServletRequestParameterException: {}", ex.getMessage());
         ExceptionEnum exceptionEnum = ExceptionEnum.MISSING_SERVLET_REQUEST_PARAMETER;
         return new ResponseEntity<>(buildWeatherExceptionDto(exceptionEnum), exceptionEnum.getHttpStatus());

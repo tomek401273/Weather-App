@@ -1,6 +1,7 @@
 package com.tgrajkowski.exception;
 
 import lombok.Getter;
+
 @Getter
 public class WeatherExceptionDto {
     private final String code;

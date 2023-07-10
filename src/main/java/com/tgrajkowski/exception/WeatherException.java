@@ -1,6 +1,6 @@
 package com.tgrajkowski.exception;
 
-import lombok.*;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +21,7 @@ public class WeatherException extends RuntimeException {
         this.exceptionEnum = exceptionEnum;
         this.additionalInfo = new HashMap<>();
     }
+
     @Override
     public String getMessage() {
         return exceptionEnum.getMessage();

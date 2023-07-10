@@ -56,7 +56,7 @@ public class TestConfig {
     @Bean
     @Primary
     public DefaultApi defaultApi(ApiClient apiClient) {
-    	return new DefaultApi(apiClient);
+        return new DefaultApi(apiClient);
     }
 
     @Bean

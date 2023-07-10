@@ -13,6 +13,7 @@ import org.springframework.web.client.RestClientException;
 
 import java.time.Clock;
 import java.time.LocalDate;
+
 @Slf4j
 @Service
 public class ForecastService {
@@ -34,11 +35,11 @@ public class ForecastService {
         try {
             return defaultApi.getForecast(latitude, longitude, weatherProperties.getDailyParameters(), weatherProperties.getTimezone(), startDate, endDate);
         } catch (HttpClientErrorException e) {
-            if (HttpStatus.NOT_FOUND.equals(e.getStatusCode())){
+            if (HttpStatus.NOT_FOUND.equals(e.getStatusCode())) {
                 log.error("HttpClientErrorException.NotFound: " + e.getMessage());
                 throw new WeatherException(ExceptionEnum.WEATHER_NOT_FOUND, e);
             }
-            if (HttpStatus.BAD_REQUEST.equals(e.getStatusCode())){
+            if (HttpStatus.BAD_REQUEST.equals(e.getStatusCode())) {
                 log.error("HttpClientErrorException.BadRequest: " + e.getMessage());
                 throw new WeatherException(ExceptionEnum.WEATHER_BAD_REQUEST, e);
             }
@@ -52,6 +53,5 @@ public class ForecastService {
             log.error("Exception: " + e.getMessage());
             throw new WeatherException(ExceptionEnum.WEATHER_API_ERROR, e);
         }
-
     }
 }

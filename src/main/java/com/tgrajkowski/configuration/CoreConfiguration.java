@@ -24,8 +24,7 @@ public class CoreConfiguration {
 
     @Bean
     public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate;
+        return new RestTemplate();
     }
 
     @Bean
@@ -34,6 +33,7 @@ public class CoreConfiguration {
         apiClient.setBasePath(address);
         return apiClient;
     }
+
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();

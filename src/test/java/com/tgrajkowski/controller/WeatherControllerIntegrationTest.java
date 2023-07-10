@@ -42,13 +42,14 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @AutoConfigureMockMvc
 @SpringBootTest(classes = {WeatherAppApplication.class, TestConfig.class})
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 public class WeatherControllerIntegrationTest {
     private static final String BASE_URL = "/weather";
-    private static final String URL_FORMAT = BASE_URL+"?latitude=%s&longitude=%s";
+    private static final String URL_FORMAT = BASE_URL + "?latitude=%s&longitude=%s";
     @Autowired
     private MockMvc mockMvc;
 
@@ -71,6 +72,7 @@ public class WeatherControllerIntegrationTest {
     private Clock clock;
 
     ObjectMapper objectMapper = new ObjectMapper();
+
     @BeforeEach
     public void beforeEach() {
         objectMapper.registerModule(new JavaTimeModule());
@@ -91,15 +93,15 @@ public class WeatherControllerIntegrationTest {
         List<WeatherDto> weatherData = new ArrayList<>();
         weatherData.add(WeatherDto
                 .builder()
-                        .precipitation(BigDecimal.valueOf(forecast.getDaily().getPrecipitationSum().get(0)))
-                        .sunrise(forecast.getDaily().getSunrise().get(0))
-                        .sunset(forecast.getDaily().getSunset().get(0))
+                .precipitation(BigDecimal.valueOf(forecast.getDaily().getPrecipitationSum().get(0)))
+                .sunrise(forecast.getDaily().getSunrise().get(0))
+                .sunset(forecast.getDaily().getSunset().get(0))
                 .build());
 
         weatherData.add(WeatherDto.builder()
-                        .precipitation(BigDecimal.valueOf(forecast.getDaily().getPrecipitationSum().get(1)))
-                        .sunrise(forecast.getDaily().getSunrise().get(1))
-                        .sunset(forecast.getDaily().getSunset().get(1))
+                .precipitation(BigDecimal.valueOf(forecast.getDaily().getPrecipitationSum().get(1)))
+                .sunrise(forecast.getDaily().getSunrise().get(1))
+                .sunset(forecast.getDaily().getSunset().get(1))
                 .build());
 
         String body = objectMapper.writeValueAsString(forecast);

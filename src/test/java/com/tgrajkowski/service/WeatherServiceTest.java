@@ -99,7 +99,8 @@ class WeatherServiceTest {
         float latitude = 123.456f;
         float longitude = 789.012f;
 
-        doThrow(new DataAccessException("Error in DB") {}).when(requestParametersRepository).save(any(RequestParameters.class));
+        doThrow(new DataAccessException("Error in DB") {
+        }).when(requestParametersRepository).save(any(RequestParameters.class));
 
         Exception exception = assertThrows(DataAccessException.class, () -> weatherService.getWeatherData(latitude, longitude));
         assertEquals("Error in DB", exception.getMessage());
